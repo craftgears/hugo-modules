@@ -1,4 +1,3 @@
-{{ $theme := .Site.Params.prettyLink.theme }}
 {{ $page := .Site.GetPage .Href }}
 
 {{ if $page }}
@@ -24,7 +23,7 @@
     {{ $faviconLink = .Site.Params.favicon }}
   {{ end }}
 
-  {{ partial (printf "pretty-link/themes/%s/thumbnail-link.html" $theme) (dict
+  {{ partial "pretty-link/links/thumbnail-link.html" (dict
     "Permalink" $permalink
     "Title" $title
     "Summary" $summary
