@@ -23,9 +23,9 @@ The href argument is the sole parameter for this shortcode.
 Here's how to use it:
 
 ```html
-{{</* pretty-link href="/blog/post-1" */>}}
+{{< pretty-link href="/blog/post-1" >}}
 
-{{</* pretty-link href="https://github.com/gohugoio/hugo" */>}}
+{{< pretty-link href="https://github.com/gohugoio/hugo" >}}
 ```
 
 - href
