@@ -1,0 +1,38 @@
+{{ $theme := .Site.Params.prettyLink.theme }}
+{{ $page := .Site.GetPage .Href }}
+
+{{ if $page }}
+  {{ $permalink := $page.RelPermalink }}
+  {{ $title := $page.Title }}
+  {{ $summary := $page.Summary | plainify }}
+  {{ $thumbnailLink := "" }}
+
+  {{ if (strings.HasPrefix $page.Params.image "http") }}
+    {{ $thumbnailLink = $page.Params.image }}
+  {{ else }}
+    {{ $thumbnail := $page.Resources.Get $page.Params.image | default (resources.Get $page.Params.image) }}
+    {{ $resizedImage := $thumbnail.Resize "0x256" }}
+    {{ $thumbnailLink = $resizedImage.RelPermalink }}
+  {{ end }}
+
+  {{ $favicon := resources.Get .Site.Params.favicon }}
+  {{ $faviconLink := "/favicon.ico" }}
+
+  {{ if $favicon}}
+    {{ $faviconLink = $favicon.Permalink }}
+  {{ else }}
+    {{ $faviconLink = .Site.Params.favicon }}
+  {{ end }}
+
+  {{ partial (printf "pretty-link/themes/%s/thumbnail-link.html" $theme) (dict
+    "Permalink" $permalink
+    "Title" $title
+    "Summary" $summary
+    "ThumbnailLink" $thumbnailLink
+    "FaviconLink" $faviconLink
+    "ImageSizeMode" "Cover"
+    )
+  }}
+{{ else }}
+  <span>{{ errorf "pretty-link: '%s' cannot be found." .Href }}</span>
+{{ end }}

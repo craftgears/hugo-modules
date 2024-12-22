@@ -1,0 +1,46 @@
+<!--
+Variables
+
+- Permalink: URL
+- Title: Site or blog's title
+- Summary: Site's description or blog's article summary
+- ThumbnailLink: Image URL
+- FaviconLink: Favicon URL
+- ImageSizeMode: Resize | Cover
+-->
+<a href="{{ .Permalink }}" class="pretty-link">
+  <div class="card">
+    <figure class="thumbnail-wrapper">
+      <img
+        class="thumbnail
+        {{ if eq .ImageSizeMode "Cover" }}
+          object-cover
+        {{ else if eq .ImageSizeMode "Resize" }}
+          object-scale-down
+        {{ end }}"
+        src="{{ .ThumbnailLink }}"
+        alt="{{ .ThumbnailLink }}"
+        onerror="this.src='https://craftgears.com/images/fallback.jpg';this.onerror=null;"
+      />
+    </figure>
+    <div class="content">
+      <div class="title-container">
+          <div class="title-wrapper">
+              {{ if .FaviconLink }}
+              <img
+                  class="favicon"
+                  src="{{ .FaviconLink }}"
+                  onerror="this.src='https://craftgears.com/images/fallback.jpg';this.onerror=null;"
+              />
+              {{ end }}
+              <span class="title">{{ .Title }}</span>
+          </div>
+          <span class="title-backpanel"></span>
+      </div>
+      <div class="summary-wrapper">
+        <div class="summary">{{ .Summary }}</div>
+      </div>
+      <span class="permalink">{{ .Permalink }}</span>
+    </div>
+  </div>
+</a>

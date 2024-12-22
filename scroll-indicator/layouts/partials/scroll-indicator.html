@@ -1,0 +1,14 @@
+<div id="scrollIndicator" class="scroll-indicator" style="background-color: {{ if . }}{{ . }}{{ else }}#ff0000{{ end }};">
+</div>
+
+<script>
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
+    const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+
+    const scrollIndicator = document.getElementById("scrollIndicator");
+    scrollIndicator.style.width = `${scrollPercentage}%`;
+  });
+</script>
